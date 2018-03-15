@@ -21,7 +21,10 @@ There will be 3 assignments. Final grade = 50% assignment, 50% written exam
 - Assignment 3 : -
 
 ### Assignment 1
--
+"In this assignment, you will use language modelling to detect in which language variety a document is written.
+You will build trigram letter language models for three varieties, generate random output, score test sentences
+with each LM, and determine the language variety based on perplexity."
+
 
 ### Assignment 2
 -
