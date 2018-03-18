@@ -11,20 +11,13 @@ class TextProcessor:
         self.path_file = path_file
         file = open(path_file, "r", encoding="utf-8")
         self.text = "".join(file.readlines())
-        self.text_has_changed = False
+        self.vocabulary = None
         self.trigrams_count = None
-        self.trigrams_probabilities = None
-        # Will contains all the sequence of word of the text
-        self.text_as_array = None
-        self.count_total_trigrams = 0
-        print("Text file successfully imported in the memory...")
+        print('==> Cleaning text...')
         self.clean_text()
-        print("The text has been cleaned according to the given instructions...")
-        self.count_letter_trigrams()
-        print("Trigrams letter have been made...")
-        print("Total amount of trigrams : ", self.count_total_trigrams)
-        self.generate_statistics()
-        print("Probabilities over trigrams successfully generated !")
+        print('==> Generating vocabulary...')
+        self.generate_vocabulary()
+
         file.close()
 
     """
@@ -35,9 +28,7 @@ class TextProcessor:
     def clean_text(self):
         self.text = regexp.sub(" ", "__", self.text.lower(), flags=regexp.MULTILINE)
         self.text = regexp.sub("[^_a-zA-Z]", "", self.text, flags=regexp.MULTILINE)
-        self.text_as_array = list(filter(None, self.text.split("_")))
         # we remove bigrams
-        self.text_as_array = [i for i in self.text_as_array if len(i) > 2]
 
     """
     Prints the whole text at its current state.
@@ -50,44 +41,62 @@ class TextProcessor:
     """
     def export(self):
         with open(self.path_file + "__results.json", 'w') as file:
-            json.dump(self.trigrams_probabilities, file)
+            json.dump(self.trigrams_count, file)
+
+    """
+    Generates the vocabulary of the text.
+    """
+    def generate_vocabulary(self):
+        self.vocabulary = {}
+        for letter in self.text:
+            if letter not in self.vocabulary.keys():
+                self.vocabulary[letter] = 1
+            else:
+                self.vocabulary[letter] += 1
 
     """
     Counts all letter 3-grams
     """
-    def count_letter_trigrams(self):
-        self.count_total_trigrams = 0
-        if self.trigrams_count is None or self.text_has_changed:
-            self.trigrams_count = {}
-            # Count all letter 3-gram
-            for word in self.text_as_array:
-                start, end = 0, 3
+    def generate_trigrams_probabilities(self):
+        # We create a 2D matrix : column = P(w_i | w_i-2, w_i-1)
+        self.trigrams_count = {}
+        start, offset_bigram, i = 0, 2, 2
 
-                if len(word) >= 3:
-                    while end < len(word):
-                        if word[start:end] not in self.trigrams_count.keys():
-                            self.trigrams_count[word[start:end]] = 1
-                        else:
-                            self.trigrams_count[word[start:end]] += 1
-                        start += 1
-                        end += 1
-                        self.count_total_trigrams += 1
+        while i < len(self.text):
+            preceding_bigram = self.text[start:offset_bigram]
+            current_letter = self.text[i]
+            if self.text[i] not in self.trigrams_count.keys():
+                self.trigrams_count[current_letter] = {}
+                # Generate all possible bigrams for that letter if not already seen
+                for x in "abcdefghijklmnopqrstuvwxyz_":
+                    for y in "abcdefghijklmnopqrstuvwxyz_":
+                        self.trigrams_count[current_letter][x + y] = 0
+            self.trigrams_count[current_letter][preceding_bigram] += 1
+
+            start += 1
+            offset_bigram += 1
+            i += 1
+            if i % 100000 == 0:
+                print("Processed", i, "letters")
+
+    def normalize_trigram_probabilities(self):
+        pass
+
+    def percentage_of_zeros(self):
+        zeros, non_zeros = 0, 0
+        for letter, preceding_bigrams in self.trigrams_count.items():
+            for preceding_bigram, count in preceding_bigrams.items():
+                if preceding_bigrams[preceding_bigram] == 0:
+                    zeros += 1
                 else:
-                    if word not in self.trigrams_count.keys():
-                        self.trigrams_count[word] = 1
-                    else:
-                        self.trigrams_count[word] += 1
-                        self.count_total_trigrams += 1
-        return self.trigrams_count
+                    non_zeros += 1
+
+        return zeros / (zeros + non_zeros)
+
+    def add_one_smoothing(self):
+        for letter, preceding_bigrams in self.trigrams_count.items():
+            for preceding_bigram, count in preceding_bigrams.items():
+                preceding_bigrams[preceding_bigram] += 1
 
     def generate_statistics(self):
-        if self.trigrams_probabilities is None or self.text_has_changed:
-            self.trigrams_probabilities = {}
-            # Count all letter 3-gram
-            if self.trigrams_count is None or self.text_has_changed:
-                self.count_letter_trigrams()
-
-            for word, count in self.trigrams_count.items():
-                self.trigrams_probabilities[word] = count / self.count_total_trigrams
-
-        return self.trigrams_probabilities
+        pass
