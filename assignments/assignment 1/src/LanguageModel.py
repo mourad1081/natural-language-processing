@@ -2,9 +2,8 @@ import os
 import random
 import re as regexp
 import json
+from decimal import Decimal
 from operator import itemgetter
-
-from math import log
 
 
 class LanguageModel:
@@ -24,12 +23,12 @@ class LanguageModel:
         self.trigrams_normalized = None
         self.k_smoothed = False
         self.k = 0
-        self.clean()
+        self.preprocessing_text()
         self.generate_vocabulary()
 
         file.close()
 
-    def clean(self):
+    def preprocessing_text(self):
         """
         Cleans the text without modifying the input file.
         The function transforms all non-char characters
@@ -42,7 +41,7 @@ class LanguageModel:
 
     def export(self):
         """
-        Exports the current state of the text in a file.
+        Exports the current state of the model in a file.
         """
         if self.trigrams_normalized is not None:
             with open(self.path_file + "__language_model.json", 'w') as file:
@@ -61,7 +60,6 @@ class LanguageModel:
                 self.vocabulary[letter] += 1
             else:
                 self.vocabulary[letter] = 1
-
         print(ANSI.ok_green, 'OK ✓', ANSI.endc)
 
     def generate_trigrams_counts(self):
@@ -71,20 +69,20 @@ class LanguageModel:
         print(' ➤➤➤ Generating trigram counts...', end='', flush=True)
         # We create a 2D matrix : column = P(w_i | w_i-2, w_i-1)
         self.trigrams_count = self.generate_all_trigrams()
-        start, offset_bigram, i = 0, 2, 2
+        start, end, i = 0, 2, 2
 
         while i < len(self.text):
-            preceding_bigram = self.text[start:offset_bigram]
+            preceding_bigram = self.text[start:end]
             current_letter = self.text[i]
 
             self.trigrams_count[preceding_bigram][current_letter] += 1
 
             start += 1
-            offset_bigram += 1
+            end += 1
             i += 1
         print(ANSI.ok_green, 'OK ✓', ANSI.endc)
 
-    def normalize_counts(self):
+    def maximum_likelihood(self):
         """
         Transform the matrix to a language model.
         """
@@ -93,36 +91,21 @@ class LanguageModel:
         v = len(self.vocabulary)
         for bigram, following_letters in self.trigrams_count.items():
             for letter, count in following_letters.items():
-                denominator = sum([v for k, v in following_letters.items()])
                 if self.k_smoothed:
+                    denominator = sum([cpt + self.k for key, cpt in following_letters.items()])
                     probability = following_letters[letter] / (denominator + (self.k * v))
                 else:
+                    denominator = sum([cpt for k, cpt in following_letters.items()])
                     probability = following_letters[letter] / denominator
 
                 self.trigrams_normalized[bigram][letter] = probability
         print(ANSI.ok_green, 'OK ✓', ANSI.endc)
 
-    def percentage_of_zeros(self):
-        """
-        Returns the percentage of zeros in the matrix.
-        :return: The percentage (between 0 and 100).
-        """
-        if self.k_smoothed:
-            print(ANSI.warning,
-                  "➤➤➤ WARNING: As you already smoothed the counts, there will probably be 0 zeros.",
-                  ANSI.endc)
-
-        zeros, non_zeros = 0, 0
-        for bigram, following_letter in self.trigrams_count.items():
-            for letter, count in following_letter.items():
-                if following_letter[letter] == 0:
-                    zeros += 1
-                else:
-                    non_zeros += 1
-
-        return round((zeros / (zeros + non_zeros)) * 100, 5)
-
     def add_k_smoothing(self, k=1):
+        """
+        Smoothes de language model by adding k to each counts.
+        :param k: Amount to add to each count.
+        """
         for letter, preceding_bigrams in self.trigrams_count.items():
             for preceding_bigram, count in preceding_bigrams.items():
                 preceding_bigrams[preceding_bigram] += k
@@ -137,7 +120,7 @@ class LanguageModel:
         :param length: Length k (3 < k < 300), according to its probabilistic model
         """
         # Step 1. We choose a random trigram starting with one or two underscores.
-        w = random.choice([bigram for bigram in self.trigrams_normalized.keys() if bigram.startswith('_')])
+        w = random.choice([w for w in self.trigrams_normalized.keys() if w.startswith('_')])
         text = w
         for i in range(length):
             # Step 2. for a given length k, now choose
@@ -148,7 +131,7 @@ class LanguageModel:
             w = text[-2:]
             # And so on, until the string reaches the desired length
 
-        text = text.replace("__", " ").replace("_", "")
+        # text = text.replace("__", " ").replace("_", "")
         print(ANSI.bold, "➤➤➤ Random output for the language model:", ANSI.endc)
         print("    ", text)
         if export_to_file:
@@ -160,25 +143,27 @@ class LanguageModel:
 
         return text
 
-    def compute_perplexity(self, text):
+    def get_perplexity_from(self, text):
         """
         Gives the perplexity of a text regarding the current language model.
         :param text: the text to evaluate
         :return: The perplexity of a text according to the current language model.
         :rtype: float
         """
-        text_cleaned = self.clean_text(text.split("\t")[1])
-
+        # [3:] because the first chars are metadatas
+        txt = self.preprocess_text(text[3:])
         # Computation of the perplexity
-        start, offset = 0, 2
+        start, end = 0, 2
         index_current_letter = 2
-        p = 1.0
-        while index_current_letter < len(text_cleaned):
-            p *= (1/self.trigrams_normalized[text_cleaned[start:offset]][text_cleaned[index_current_letter]])
+        p = Decimal(1.0)
+        while index_current_letter < len(txt):
+            p *= Decimal(Decimal(1.0)/Decimal(self.trigrams_normalized[txt[start:end]][txt[index_current_letter]]))
             start += 1
-            offset += 1
+            end += 1
             index_current_letter += 1
-        return p ** (1/len(text_cleaned))
+
+        res = Decimal(p ** Decimal(1/len(txt)))
+        return res
 
     @staticmethod
     def generate_all_trigrams():
@@ -190,7 +175,6 @@ class LanguageModel:
         for first_letter in alphabet:
             for second_letter in alphabet:
                 z[first_letter + second_letter] = {}
-
                 for third_letter in alphabet:
                     z[first_letter + second_letter][third_letter] = 0
         return z
@@ -201,7 +185,7 @@ class LanguageModel:
         Generates a random 
         :parameter possible_letters: The list of (letter, corresponding proba).
         """
-        # As the probabilities does not sum to 1, our random will not be
+        # As the probabilities does not sum to 1... I think, our random will not be
         # in the range 0...1, but 0... sum{probas of the third letters for a given bigram}
 
         # The sort here is mandatory in order to
@@ -220,7 +204,7 @@ class LanguageModel:
         return random.choice(possible_letters)[0]
 
     @staticmethod
-    def clean_text(text):
+    def preprocess_text(text):
         """
         Cleans a text.
         :parameter text: the text to clean

@@ -8,12 +8,12 @@ def generate_language_model(path):
 
     lm.generate_trigrams_counts()
 
-    k = 2 if path.endswith("AU") else 1 if path.endswith("GB") else 2
+    k = 2 if path.endswith("AU") else 1.2 if path.endswith("GB") else 1.8
     lm.add_k_smoothing(k=k)
-    lm.normalize_counts()
+    lm.maximum_likelihood()
 
     lm.export()
-    lm.generate_random_output(export_to_file=True)
+    lm.generate_random_output(length=200, export_to_file=True)
     print("\n")
     return lm
 
@@ -43,15 +43,15 @@ if __name__ == '__main__':
         for line in file.readlines():
             perplexities['line ' + str(i)] = {}
             print(ANSI.ok_blue, "Line to classify (results below):")
-            print(" ", line, ANSI.endc)
+            print("➤➤➤", line[:50] + '...', ANSI.endc)
             print(" ➤➤➤ Results:")
             print(" -----------")
             for lmodel in language_models:
-                perplexities['line ' + str(i)][lmodel.name] = lmodel.compute_perplexity(line)
+                perplexities['line ' + str(i)][lmodel.name] = lmodel.get_perplexity_from(line)
                 print(" ➤➤➤ Perplexity of", lmodel.name, "=", perplexities['line ' + str(i)][lmodel.name])
 
             x = min(perplexities['line ' + str(i)].keys(), key=(lambda k: perplexities['line ' + str(i)][k]))
-            print(ANSI.header, '★★★★★★★★★★★ Best result:', x, '★★★★★★★★★★★★', ANSI.endc)
+            print(ANSI.header, '★★★★★★★★ Best result:', x, '★★★★★★★★★★', ANSI.endc)
             i += 1
 
         file.close()
