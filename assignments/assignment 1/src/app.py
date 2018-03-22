@@ -1,4 +1,6 @@
-from src.LanguageModel import LanguageModel, ANSI
+# -*- coding: utf-8 -*-
+
+from LanguageModel import LanguageModel, ANSI
 
 
 def generate_language_model(path):
@@ -43,15 +45,15 @@ if __name__ == '__main__':
         for line in file.readlines():
             perplexities['line ' + str(i)] = {}
             print(ANSI.ok_blue, "Line to classify (results below):")
-            print("➤➤➤", line[:50] + '...', ANSI.endc)
-            print(" ➤➤➤ Results:")
+            print(" >>>", line[:50] + '...', ANSI.endc)
+            print(" >>> Results:")
             print(" -----------")
             for lmodel in language_models:
                 perplexities['line ' + str(i)][lmodel.name] = lmodel.get_perplexity_from(line)
-                print(" ➤➤➤ Perplexity of", lmodel.name, "=", perplexities['line ' + str(i)][lmodel.name])
+                print(" >>> Perplexity of", lmodel.name, "=", perplexities['line ' + str(i)][lmodel.name])
 
             x = min(perplexities['line ' + str(i)].keys(), key=(lambda k: perplexities['line ' + str(i)][k]))
-            print(ANSI.header, '★★★★★★★★ Best result:', x, '★★★★★★★★★★', ANSI.endc)
+            print(ANSI.header, '***************** Best result:', x, '******************', ANSI.endc)
             i += 1
 
         file.close()

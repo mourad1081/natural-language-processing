@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import os
 import random
 import re as regexp
@@ -34,10 +36,10 @@ class LanguageModel:
         The function transforms all non-char characters
         to double underscores.
         """
-        print(' ➤➤➤ Cleaning text...', end='', flush=True)
+        print(' >>> Cleaning text...', end='', flush=True)
         self.text = regexp.sub(" ", "__", self.text.lower(), flags=regexp.MULTILINE)
         self.text = "_" + regexp.sub("[^_a-z]", "", self.text, flags=regexp.MULTILINE) + "_"
-        print(ANSI.ok_green, 'OK ✓', ANSI.endc)
+        print(ANSI.ok_green, 'OK !', ANSI.endc)
 
     def export(self):
         """
@@ -46,27 +48,27 @@ class LanguageModel:
         if self.trigrams_normalized is not None:
             with open(self.path_file + "__language_model.json", 'w') as file:
                 json.dump(self.trigrams_normalized, file, indent=4)
-            print(ANSI.bold, "➤➤➤ Language model successfully generated.", ANSI.endc)
+            print(ANSI.bold, ">>> Language model successfully generated.", ANSI.endc)
             print("     Path to language model: ", ANSI.ok_green, self.path_file + "__language_model.json", ANSI.endc)
 
     def generate_vocabulary(self):
         """
         Generates the vocabulary of the text.
         """
-        print(' ➤➤➤ Generating vocabulary...', end='', flush=True)
+        print(' >>> Generating vocabulary...', end='', flush=True)
         self.vocabulary = {}
         for letter in self.text:
             if letter in self.vocabulary.keys():
                 self.vocabulary[letter] += 1
             else:
                 self.vocabulary[letter] = 1
-        print(ANSI.ok_green, 'OK ✓', ANSI.endc)
+        print(ANSI.ok_green, 'OK !', ANSI.endc)
 
     def generate_trigrams_counts(self):
         """
         Counts all letter 3-grams
         """
-        print(' ➤➤➤ Generating trigram counts...', end='', flush=True)
+        print(' >>> Generating trigram counts...', end='', flush=True)
         # We create a 2D matrix : column = P(w_i | w_i-2, w_i-1)
         self.trigrams_count = self.generate_all_trigrams()
         start, end, i = 0, 2, 2
@@ -80,13 +82,13 @@ class LanguageModel:
             start += 1
             end += 1
             i += 1
-        print(ANSI.ok_green, 'OK ✓', ANSI.endc)
+        print(ANSI.ok_green, 'OK !', ANSI.endc)
 
     def maximum_likelihood(self):
         """
         Transform the matrix to a language model.
         """
-        print(' ➤➤➤ Generating trigram probabilities...', end='', flush=True)
+        print(' >>> Generating trigram probabilities...', end='', flush=True)
         self.trigrams_normalized = self.generate_all_trigrams()
         v = len(self.vocabulary)
         for bigram, following_letters in self.trigrams_count.items():
@@ -99,7 +101,7 @@ class LanguageModel:
                     probability = following_letters[letter] / denominator
 
                 self.trigrams_normalized[bigram][letter] = probability
-        print(ANSI.ok_green, 'OK ✓', ANSI.endc)
+        print(ANSI.ok_green, 'OK !', ANSI.endc)
 
     def add_k_smoothing(self, k=1):
         """
@@ -132,11 +134,11 @@ class LanguageModel:
             # And so on, until the string reaches the desired length
 
         # text = text.replace("__", " ").replace("_", "")
-        print(ANSI.bold, "➤➤➤ Random output for the language model:", ANSI.endc)
+        print(ANSI.bold, ">>> Random output for the language model:", ANSI.endc)
         print("    ", text)
         if export_to_file:
             path = "random_output_" + os.path.basename(self.path_file)
-            print(ANSI.bold, "➤➤➤ Random output successully exported.", ANSI.endc)
+            print(ANSI.bold, ">>> Random output successully exported.", ANSI.endc)
             print("     Path to random output: ", ANSI.ok_green, path, ANSI.endc)
             with open(path, 'w') as file:
                 file.write(text)
