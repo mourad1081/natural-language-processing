@@ -17,7 +17,7 @@ All the slides are in the corresponding folder.
 - Lesson 1 : Introduction to the course and NLTK, the tool that we will use during this course.
 - Lesson 2 : Morphology and spelling correction.
 - Lesson 3 : We speak about Language models and the first assignment.
-- Lesson 4 : Part-of-speech tagging
+- Lesson 4 : Part-of-speech tagging.
 - Lesson 5 :
 - ...
 
