@@ -36,7 +36,7 @@ class LanguageModel:
         """
         print(' ➤➤➤ Cleaning text...', end='', flush=True)
         self.text = regexp.sub(" ", "__", self.text.lower(), flags=regexp.MULTILINE)
-        self.text = "_" + regexp.sub("[^_a-zA-Z]", "", self.text, flags=regexp.MULTILINE) + "_"
+        self.text = "_" + regexp.sub("[^_a-z]", "", self.text, flags=regexp.MULTILINE) + "_"
         print(ANSI.ok_green, 'OK ✓', ANSI.endc)
 
     def export(self):
@@ -210,7 +210,7 @@ class LanguageModel:
         :parameter text: the text to clean
         """
         text = regexp.sub(" ", "__", text.lower(), flags=regexp.MULTILINE)
-        return "_" + regexp.sub("[^_a-zA-Z]", "", text, flags=regexp.MULTILINE) + "_"
+        return "_" + regexp.sub("[^_a-z]", "", text, flags=regexp.MULTILINE) + "_"
 
 
 # Just for pretty printings
