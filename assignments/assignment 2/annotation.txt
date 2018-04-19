@@ -1,4 +1,6 @@
+# sent_id = 1
 # text = I gave an apple to the teacher
+# 1.ID, 2.FORM, 3.LEMMA, 4.UPOSTAG, 7.HEAD, 8.DEPREL.
 #ID	FORM	LEMMA	UPOSTAG		XPOSTAG		FEATS 		HEAD	DEPREL  	DEPS		MISC
 1	I		I		PRON		_			_			2		nsubj		_			_
 2	gave	give	VERB 		_			_			0		root		_			_
@@ -8,6 +10,7 @@
 6	the		the 	DET			_			_			7		det			_			_
 7	teacher teacher	NOUN		_			_			2		iobj		_			_
 
+# sent_id = 2
 # text = Mary missed her train to work
 #ID	FORM	LEMMA	UPOSTAG		XPOSTAG		FEATS 		HEAD	DEPREL  	DEPS		MISC
 1	Mary	Mary	PROPN		_			_			2		nsubj		_			_
@@ -17,6 +20,7 @@
 5	to 		to		ADP			_			_			6		det			_			_
 6	work	work	VERB		_			_			4		acl			_			_
 
+# sent_id = 3
 # text = John gave the teacher a very heavy book
 #ID	FORM	LEMMA	UPOSTAG		XPOSTAG		FEATS 		HEAD	DEPREL  	DEPS		MISC
 1	John	John	PROPN		_			_			2		nsubj		_			_
@@ -28,12 +32,14 @@
 7	heavy	heavy	ADJ			_			_			8		amod		_			_
 8	book	book	NOUN		_			_			2		obj			_			_
 
+# sent_id = 4
 # text = The sun shines
 #ID	FORM	LEMMA	UPOSTAG		XPOSTAG		FEATS 		HEAD	DEPREL  	DEPS		MISC
 1	The		The		DET			_			_			2		det			_			_
 2	sun		sun		NOUN		_			_			3		nsubj		_			_
 3	shines	shine	VERB		_			_			0		root		_			_
 
+# sent_id = 5
 # text = This is the dog that chased the cat
 #ID	FORM	LEMMA	UPOSTAG		XPOSTAG		FEATS 		HEAD	DEPREL  	DEPS		MISC
 1	This	This	PRON		_			_			4		nsubj		_			_
@@ -45,6 +51,7 @@
 7	the		the		DET			_			_			8		det			_			_
 8	cat		cat		NOUN		_			_			6		obj			_			_
 
+# sent_id = 6
 # text = I saw the doctor this morning who is treating me
 #ID	FORM	LEMMA	UPOSTAG		XPOSTAG		FEATS 		HEAD	DEPREL  	DEPS		MISC
 1	I		I		PRON		_			_			2		nsubj		_			_
@@ -58,6 +65,7 @@
 9 	treating treat	VERB		_			_			4		acl			_			_
 10	me		me		PRON		_			_			9		obj			_			_
 
+# sent_id = 7
 # text = This is the cat that the dog chased
 #ID	FORM	LEMMA	UPOSTAG		XPOSTAG		FEATS 		HEAD	DEPREL  	DEPS		MISC
 1	This	I		PRON		_			_			4		nsubj		_			_
@@ -69,10 +77,12 @@
 7	dog		dog		NOUN		_			_			8		nsubj		_			_
 8	chased	chase	VERB		_			_			4		ccomp		_			_
 
+
+# sent_id = 8
 # text = John is eager to please
 #ID	FORM	LEMMA	UPOSTAG		XPOSTAG		FEATS 		HEAD	DEPREL  	DEPS		MISC
 1	John	John	PROPN		_			_			3		nsubj		_			_
 2	is		be		VERB		_			_			3		cop			_			_
 3	eager	eager	ADV			_			_			0		root		_			_
 4	to		to		DET			_			_			5		mark		_			_
-5	please	please	VERB		_			_			3		xcomp		_			_
+5	please	please	VERB		_			_			3		xcomp		_			_	
