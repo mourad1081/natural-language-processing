@@ -1,88 +1,78 @@
-# sent_id = 1
 # text = I gave an apple to the teacher
-# 1.ID, 2.FORM, 3.LEMMA, 4.UPOSTAG, 7.HEAD, 8.DEPREL.
-#ID	FORM	LEMMA	UPOSTAG		XPOSTAG		FEATS 		HEAD	DEPREL  	DEPS		MISC
-1	I		I		PRON		_			_			2		nsubj		_			_
-2	gave	give	VERB 		_			_			0		root		_			_
-3	an		an		DET			_			_			4		det			_			_
-4	apple	apple	NOUN		_			_			2		obj			_			_
-5	to		to		ADP			_			_			7		case		_			_
-6	the		the 	DET			_			_			7		det			_			_
-7	teacher teacher	NOUN		_			_			2		iobj		_			_
+#ID	FORM	LEMMA	UPOSTAGXPOSTAGFEATS HEAD	DEPREL	DEPSMISC
+1	IIPRON_	_	2nsubj_	_
+2	gave	give	VERB_	_	0root_	_
+3	ananDET	_	_	4det	_	_
+4	apple	apple	NOUN_	_	2obj	_	_
+5	totoADP	_	_	7case_	_
+6	thethe	DET	_	_	7det	_	_
+7	teacher teacher	NOUN_	_	2iobj_	_
 
-# sent_id = 2
 # text = Mary missed her train to work
-#ID	FORM	LEMMA	UPOSTAG		XPOSTAG		FEATS 		HEAD	DEPREL  	DEPS		MISC
-1	Mary	Mary	PROPN		_			_			2		nsubj		_			_
-2	missed	miss	VERB		_			_			0		root		_			_
-3	her		her		PRON		_			_			4		det			_			_
-4	train	train	NOUN		_			_			2		obj			_			_
-5	to 		to		ADP			_			_			6		det			_			_
-6	work	work	VERB		_			_			4		acl			_			_
+#ID	FORM	LEMMA	UPOSTAGXPOSTAGFEATS HEAD	DEPREL	DEPSMISC
+1	Mary	Mary	PROPN_	_	2nsubj_	_
+2	missed	miss	VERB_	_	0root_	_
+3	herherPRON_	_	4det	_	_
+4	train	train	NOUN_	_	2obj	_	_
+5	to toADP	_	_	6det	_	_
+6	work	work	VERB_	_	4acl	_	_
 
-# sent_id = 3
 # text = John gave the teacher a very heavy book
-#ID	FORM	LEMMA	UPOSTAG		XPOSTAG		FEATS 		HEAD	DEPREL  	DEPS		MISC
-1	John	John	PROPN		_			_			2		nsubj		_			_
-2	gave	give	VERB		_			_			0		root		_			_
-3	the		the		DET			_			_			4		det			_			_
-4	teacher	teacher	NOUN		_			_			2		iobj		_			_
-5	a		a		DET			_			_			8		det			_			_
-6	very	very	ADV			_			_			7		advmod		_			_
-7	heavy	heavy	ADJ			_			_			8		amod		_			_
-8	book	book	NOUN		_			_			2		obj			_			_
+#ID	FORM	LEMMA	UPOSTAGXPOSTAGFEATS HEAD	DEPREL	DEPSMISC
+1	John	John	PROPN_	_	2nsubj_	_
+2	gave	give	VERB_	_	0root_	_
+3	thetheDET	_	_	4det	_	_
+4	teacher	teacher	NOUN_	_	2iobj_	_
+5	aaDET	_	_	8det	_	_
+6	very	very	ADV	_	_	7advmod_	_
+7	heavy	heavy	ADJ	_	_	8amod_	_
+8	book	book	NOUN_	_	2obj	_	_
 
-# sent_id = 4
 # text = The sun shines
-#ID	FORM	LEMMA	UPOSTAG		XPOSTAG		FEATS 		HEAD	DEPREL  	DEPS		MISC
-1	The		The		DET			_			_			2		det			_			_
-2	sun		sun		NOUN		_			_			3		nsubj		_			_
-3	shines	shine	VERB		_			_			0		root		_			_
+#ID	FORM	LEMMA	UPOSTAGXPOSTAGFEATS HEAD	DEPREL	DEPSMISC
+1	TheTheDET	_	_	2det	_	_
+2	sunsunNOUN_	_	3nsubj_	_
+3	shines	shine	VERB_	_	0root_	_
 
-# sent_id = 5
 # text = This is the dog that chased the cat
-#ID	FORM	LEMMA	UPOSTAG		XPOSTAG		FEATS 		HEAD	DEPREL  	DEPS		MISC
-1	This	This	PRON		_			_			4		nsubj		_			_
-2	is		be		VERB		_			_			4		cop			_			_
-3	the		the		DET			_			_			4		det			_			_
-4	dog		dog		NOUN		_			_			0		root		_			_
-5	that	that	PRON		_			_			6		nsubj		_			_
-6	chase	chase	VERB		_			_			4		acl:rol		_			_
-7	the		the		DET			_			_			8		det			_			_
-8	cat		cat		NOUN		_			_			6		obj			_			_
+#ID	FORM	LEMMA	UPOSTAGXPOSTAGFEATS HEAD	DEPREL	DEPSMISC
+1	This	This	PRON_	_	4nsubj_	_
+2	isbeVERB_	_	4cop	_	_
+3	thetheDET	_	_	4det	_	_
+4	dogdogNOUN_	_	0root_	_
+5	that	that	PRON_	_	6nsubj_	_
+6	chase	chase	VERB_	_	4acl:rol_	_
+7	thetheDET	_	_	8det	_	_
+8	catcatNOUN_	_	6obj	_	_
 
-# sent_id = 6
 # text = I saw the doctor this morning who is treating me
-#ID	FORM	LEMMA	UPOSTAG		XPOSTAG		FEATS 		HEAD	DEPREL  	DEPS		MISC
-1	I		I		PRON		_			_			2		nsubj		_			_
-2	saw		see		VERB		_			_			0		root		_			_
-3	the		the		DET			_			_			4		det			_			_
-4	doctor	doctor	NOUN		_			_			2		obj			_			_
-5	this	this	PRON		_			_			6		det			_			_
-6	morning	morning NOUN		_			_			2		iobj		_			_
-7	who		who		PRON		_			_			9		nsubj		_			_
-8	is		be		VERB		_			_			9		aux			_			_
-9 	treating treat	VERB		_			_			4		acl			_			_
-10	me		me		PRON		_			_			9		obj			_			_
+#ID	FORM	LEMMA	UPOSTAGXPOSTAGFEATS HEAD	DEPREL	DEPSMISC
+1	IIPRON_	_	2nsubj_	_
+2	sawseeVERB_	_	0root_	_
+3	thetheDET	_	_	4det	_	_
+4	doctor	doctor	NOUN_	_	2obj	_	_
+5	this	this	PRON_	_	6det	_	_
+6	morning	morning NOUN_	_	2iobj_	_
+7	whowhoPRON_	_	9nsubj_	_
+8	isbeVERB_	_	9aux	_	_
+9	treating treat	VERB_	_	4acl	_	_
+10	memePRON_	_	9obj	_	_
 
-# sent_id = 7
 # text = This is the cat that the dog chased
-#ID	FORM	LEMMA	UPOSTAG		XPOSTAG		FEATS 		HEAD	DEPREL  	DEPS		MISC
-1	This	I		PRON		_			_			4		nsubj		_			_
-2	is		be		VERB		_			_			4		cop			_			_
-3	the		the		DET			_			_			4		det			_			_
-4	cat		cat		NOUN		_			_			0		root		_			_
-5	that	that	PRON		_			_			8		mark		_			_
-6	the		the		DET			_			_			7		det			_			_
-7	dog		dog		NOUN		_			_			8		nsubj		_			_
-8	chased	chase	VERB		_			_			4		ccomp		_			_
+#ID	FORM	LEMMA	UPOSTAGXPOSTAGFEATS HEAD	DEPREL	DEPSMISC
+1	This	IPRON_	_	4nsubj_	_
+2	isbeVERB_	_	4cop	_	_
+3	thetheDET	_	_	4det	_	_
+4	catcatNOUN_	_	0root_	_
+5	that	that	PRON_	_	8mark_	_
+6	thetheDET	_	_	7det	_	_
+7	dogdogNOUN_	_	8nsubj_	_
+8	chased	chase	VERB_	_	4ccomp_	_
 
-
-# sent_id = 8
 # text = John is eager to please
-#ID	FORM	LEMMA	UPOSTAG		XPOSTAG		FEATS 		HEAD	DEPREL  	DEPS		MISC
-1	John	John	PROPN		_			_			3		nsubj		_			_
-2	is		be		VERB		_			_			3		cop			_			_
-3	eager	eager	ADV			_			_			0		root		_			_
-4	to		to		DET			_			_			5		mark		_			_
-5	please	please	VERB		_			_			3		xcomp		_			_	
+#ID	FORM	LEMMA	UPOSTAGXPOSTAGFEATS HEAD	DEPREL	DEPSMISC
+1	John	John	PROPN_	_	3nsubj_	_
+2	isbeVERB_	_	3cop	_	_
+3	eager	eager	ADV	_	_	0root_	_
+4	totoDET	_	_	5mark_	_
+5	please	please	VERB_	_	3xcomp_	_

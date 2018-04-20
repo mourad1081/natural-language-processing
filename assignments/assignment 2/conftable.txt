@@ -1,0 +1,68 @@
+<sentence file="input.txt" id="1 text="I gave an apple to the teacher ">
+Step	Stack	Word List	Action	RelationAdded
+1	[root]	[I,gave,an,apple,to,the,teacher]	SHIFT
+2	[root,I]	[gave,an,apple,to,the,teacher]	SHIFT
+3	[root,I,gave]	[an,apple,to,the,teacher]	SHIFT
+4	[root,I,gave,an]	[apple,to,the,teacher]	SHIFT
+5	[root,I,gave,an,apple]	[to,the,teacher]	LEFTARC	(apple<-an)
+6	[root,I,gave,apple]	[to,the,teacher]	RIGHTARC	(apple->gave)
+7	[root,I,gave]	[to,the,teacher]	SHIFT
+8	[root,I,gave,to]	[the,teacher]	SHIFT
+9	[root,I,gave,to,the]	[teacher]	SHIFT
+10	[root,I,gave,to,the,teacher]	[]	LEFTARC	(teacher<-the)
+11	[root,I,gave,to,teacher]	[]	LEFTARC	(teacher<-to)
+12	[root,I,gave,teacher]	[]	RIGHTARC	(teacher->gave)
+13	[root,I,gave]	[]	LEFTARC	(gave<-I)
+14	[root,gave]	[]	RIGHTARC	(gave->root)
+14	[root]	[]	Done
+</sentence>
+
+<sentence file="input.txt" id="2 text="Mary missed her train to work ">
+Step	Stack	Word List	Action	RelationAdded
+1	[root]	[Mary,missed,her,train,to,work]	SHIFT
+2	[root,Mary]	[missed,her,train,to,work]	SHIFT
+3	[root,Mary,missed]	[her,train,to,work]	SHIFT
+4	[root,Mary,missed,her]	[train,to,work]	SHIFT
+5	[root,Mary,missed,her,train]	[to,work]	LEFTARC	(train<-her)
+6	[root,Mary,missed,train]	[to,work]	RIGHTARC	(train->missed)
+7	[root,Mary,missed]	[to,work]	SHIFT
+8	[root,Mary,missed,to]	[work]	SHIFT
+9	[root,Mary,missed,to,work]	[]	LEFTARC	(work<-to)
+10	[root,Mary,missed,work]	[]	RIGHTARC	(work->missed)
+11	[root,Mary,missed]	[]	LEFTARC	(missed<-Mary)
+12	[root,missed]	[]	RIGHTARC	(missed->root)
+12	[root]	[]	Done
+</sentence>
+
+<sentence file="input.txt" id="3 text="John gave the teacher a very heavy book ">
+Step	Stack	Word List	Action	RelationAdded
+1	[root]	[John,gave,the,teacher,a,very,heavy,book]	SHIFT
+2	[root,John]	[gave,the,teacher,a,very,heavy,book]	SHIFT
+3	[root,John,gave]	[the,teacher,a,very,heavy,book]	SHIFT
+4	[root,John,gave,the]	[teacher,a,very,heavy,book]	SHIFT
+5	[root,John,gave,the,teacher]	[a,very,heavy,book]	LEFTARC	(teacher<-the)
+6	[root,John,gave,teacher]	[a,very,heavy,book]	RIGHTARC	(teacher->gave)
+7	[root,John,gave]	[a,very,heavy,book]	SHIFT
+8	[root,John,gave,a]	[very,heavy,book]	SHIFT
+9	[root,John,gave,a,very]	[heavy,book]	SHIFT
+10	[root,John,gave,a,very,heavy]	[book]	LEFTARC	(heavy<-very)
+11	[root,John,gave,a,heavy]	[book]	SHIFT
+12	[root,John,gave,a,heavy,book]	[]	LEFTARC	(book<-heavy)
+13	[root,John,gave,a,book]	[]	LEFTARC	(book<-a)
+14	[root,John,gave,book]	[]	RIGHTARC	(book->gave)
+15	[root,John,gave]	[]	LEFTARC	(gave<-John)
+16	[root,gave]	[]	RIGHTARC	(gave->root)
+16	[root]	[]	Done
+</sentence>
+
+<sentence file="input.txt" id="4 text="The sun shines ">
+Step	Stack	Word List	Action	RelationAdded
+1	[root]	[The,sun,shines]	SHIFT
+2	[root,The]	[sun,shines]	SHIFT
+3	[root,The,sun]	[shines]	LEFTARC	(sun<-The)
+4	[root,sun]	[shines]	SHIFT
+5	[root,sun,shines]	[]	LEFTARC	(shines<-sun)
+6	[root,shines]	[]	RIGHTARC	(shines->root)
+6	[root]	[]	Done
+</sentence>
+
