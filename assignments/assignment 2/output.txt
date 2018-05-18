@@ -1,0 +1,44 @@
+# sent_id = 1
+# text = I gave an apple to the teacher 
+#1.ID	2.FORM	3.LEMMA	4.UPOSTAG	5.XPOSTAG	6.FEATS	7.HEAD	8.DEPREL
+1	I	I	PRON	_	_	2	DEP
+2	gave	give	VERB	_	_	0	DEP
+3	an	an	DET	_	_	4	DEP
+4	apple	apple	NOUN	_	_	2	DEP
+5	to	to	ADP	_	_	7	DEP
+6	the	the	DET	_	_	7	DEP
+7	teacher	teacher	NOUN	_	_	2	DEP
+
+
+# sent_id = 2
+# text = Mary missed her train to work 
+#1.ID	2.FORM	3.LEMMA	4.UPOSTAG	5.XPOSTAG	6.FEATS	7.HEAD	8.DEPREL
+1	Mary	Mary	PROPN	_	_	2	DEP
+2	missed	miss	VERB	_	_	0	DEP
+3	her	her	PRON	_	_	4	DEP
+4	train	train	NOUN	_	_	2	DEP
+5	to	to	ADP	_	_	6	DEP
+6	work	work	VERB	_	_	2	DEP
+
+
+# sent_id = 3
+# text = John gave the teacher a very heavy book 
+#1.ID	2.FORM	3.LEMMA	4.UPOSTAG	5.XPOSTAG	6.FEATS	7.HEAD	8.DEPREL
+1	John	John	PROPN	_	_	2	DEP
+2	gave	give	VERB	_	_	0	DEP
+3	the	the	DET	_	_	4	DEP
+4	teacher	teacher	NOUN	_	_	2	DEP
+5	a	a	DET	_	_	8	DEP
+6	very	very	ADV	_	_	7	DEP
+7	heavy	heavy	ADJ	_	_	8	DEP
+8	book	book	NOUN	_	_	2	DEP
+
+
+# sent_id = 4
+# text = The sun shines 
+#1.ID	2.FORM	3.LEMMA	4.UPOSTAG	5.XPOSTAG	6.FEATS	7.HEAD	8.DEPREL
+1	The	The	DET	_	_	2	DEP
+2	sun	sun	NOUN	_	_	3	DEP
+3	shines	shine	VERB	_	_	0	DEP
+
+
