@@ -1,0 +1,7 @@
+(STRING the-1 the)
+(STRING the-2 the)
+(STRING king-1 king)
+(STRING north-1 north)
+
+(PRECEDES the-1 king-1)
+(BETWEEN king-1 the-1 north-1)

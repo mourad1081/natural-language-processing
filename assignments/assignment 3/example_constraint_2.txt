@@ -1,0 +1,8 @@
+(STRING it-1 it)
+(STRING is-1 is)
+(STRING raining-1 raining)
+(STRING men-1 men)
+
+(PRECEDES it-1 raining-1)
+(MEETS it-1 is-1)
+

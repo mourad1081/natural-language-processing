@@ -1,0 +1,8 @@
+(STRING that-1 that)
+(STRING so-1 so)
+(STRING is-1 is)
+(STRING romance-1 romance)
+(STRING sweet-1 sweet)
+
+(MEETS that-1 romance-1)
+(MEETS romance-1 that-1)

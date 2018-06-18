@@ -91,14 +91,14 @@ class LanguageModel:
         print(' >>> Generating trigram probabilities...', end='', flush=True)
         self.trigrams_normalized = self.generate_all_trigrams()
         v = len(self.vocabulary)
-        for bigram, following_letters in self.trigrams_count.items():
-            for letter, count in following_letters.items():
+        for bigram, following_bigram in self.trigrams_count.items():
+            for letter, count in following_bigram.items():
                 if self.k_smoothed:
-                    denominator = sum([cpt + self.k for key, cpt in following_letters.items()])
-                    probability = following_letters[letter] / (denominator + (self.k * v))
+                    denominator = sum([cpt + self.k for key, cpt in following_bigram.items()])
+                    probability = following_bigram[letter] / (denominator + (self.k * v))
                 else:
-                    denominator = sum([cpt for k, cpt in following_letters.items()])
-                    probability = following_letters[letter] / denominator
+                    denominator = sum([cpt for k, cpt in following_bigram.items()])
+                    probability = following_bigram[letter] / denominator
 
                 self.trigrams_normalized[bigram][letter] = probability
         print(ANSI.ok_green, 'OK !', ANSI.endc)

@@ -1,0 +1,9 @@
+(STRING a-1 a)
+(STRING rolling-1 rolling)
+(STRING stone-1 stone)
+(STRING gathers-1 gathers)
+(STRING no-1 no)
+(STRING moss-1 moss)
+
+(MEETS rolling-1 stone-1)
+(MEETS no-1 moss-1)

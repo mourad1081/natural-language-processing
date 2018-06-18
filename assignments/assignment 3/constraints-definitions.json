@@ -1,0 +1,80 @@
+{
+  "macros": [
+    {
+      "name": "LAST",
+      "comment": "All 'LAST' keywords will be replaced by eval([meaning]) in the code. Thus, the field 'meaning' MUST be an evaluable expression.",
+      "meaning": "len(self.words) - 1"
+    },
+    {
+      "name": "FIRST",
+      "meaning": "0"
+    }
+  ],
+  "jokers": [
+    "the", "of", "to", "and", "a", "in", "is", "it", "you", "that", "he", "was", "for", "on", "are", "with", "as", "I", "his", "they", "be", "at", "one", "have", "this", "from", "or", "had", "by", "hot", "but", "some", "what", "there", "we", "can", "out", "other", "were", "all", "your", "when", "up", "use", "word", "how", "said", "an", "each", "she", "which", "do", "their", "time", "if", "will", "way", "about", "many", "then", "them", "would", "write", "like", "so", "these", "her"
+  ],
+  "constraints": [
+    {
+      "name": "meets",
+      "#arguments": 2,
+      "meaning": ["x1 == x2 - 1"]
+    },
+    {
+      "name": "first",
+      "#arguments": 1,
+      "meaning": ["x1 == 0"]
+    },
+    {
+      "name": "last",
+      "#arguments": 1,
+      "meaning": ["x1 == LAST"]
+    },
+    {
+      "name": "between",
+      "#arguments": 3,
+      "meaning": ["x1 > x2", "x1 < x3"]
+    },
+    {
+      "name": "between-2",
+      "#arguments": 3,
+      "comment": "Modelizes the fact that we want x1 to be between x2 and x3 while the two previous variables must have 2 words between them.",
+      "meaning": ["x1 > x2", "x1 < x3", "abs(x2 - x3) == 3"]
+    },
+    {
+      "name": "between-3",
+      "#arguments": 3,
+      "meaning": ["x1 > x2", "x1 < x3", "abs(x2 - x3) == 4"]
+    },
+    {
+      "name": "between-4",
+      "#arguments": 3,
+      "meaning": ["x1 > x2", "x1 < x3", "abs(x2 - x3) == 5"]
+    },
+    {
+      "name": "between-5",
+      "#arguments": 3,
+      "meaning": ["x1 > x2", "x1 < x3", "abs(x2 - x3) == 6"]
+    },
+    {
+      "name": "between-6",
+      "#arguments": 3,
+      "meaning": ["x1 > x2", "x1 < x3", "abs(x2 - x3) == 7"]
+    },
+    {
+      "name": "first-or-last",
+      "#arguments": 1,
+      "meaning": ["x1 == 0 or x1 == LAST"]
+    },
+    {
+      "name": "precedes",
+      "#arguments": 2,
+      "meaning": ["x1 < x2"]
+    },
+    {
+      "name": "last-if",
+      "#arguments": 2,
+      "meaning": ["x2 == LAST if x1 <= LAST else x1 <= LAST"]
+    }
+  ]
+}
+
