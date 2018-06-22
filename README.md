@@ -1,6 +1,6 @@
 # Natural Language Processing - ULB - 2017/2018
 
-- This repository will contains all the assignments and materials for
+- This repository will contain all the assignments and materials for
   the course of Natural Language Processing 2017/2018
 
 ## References
@@ -33,4 +33,8 @@ with each LM, and determine the language variety based on perplexity.
 
 ### Assignment 2
 
+...
+
 ### Assignment 3
+
+...
